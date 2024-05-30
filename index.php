@@ -1,9 +1,3 @@
-<?php
-     session_start();
-     require "koneksi.php";
-     $queryProduk = mysqli_query($con, "SELECT id, nama, harga, foto, detail FROM produk LIMIT 6");
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,84 +14,80 @@
           }
 
           .carousel-image {
-        width: 100%;
-        height: auto; /* Let the height adjust automatically */
-        object-fit: cover;
-    }
+               width: 100%;
+               height: auto; /* Let the height adjust automatically */
+               object-fit: cover;
+          }
 
-    @media (min-width: 576px) {
-        .carousel-image {
-            height: 400px;
-        }
-    }
+          @media (min-width: 576px) {
+               .carousel-image {
+                    height: 400px;
+               }
+          }
 
-    @media (min-width: 768px) {
-        .carousel-image {
-            height: 400px;
-        }
-    }
+          @media (min-width: 768px) {
+               .carousel-image {
+                    height: 400px;
+               }
+          }
 
-    @media (min-width: 992px) {
-        .carousel-image {
-            height: 500px;
-        }
-    }
+          @media (min-width: 992px) {
+               .carousel-image {
+                    height: 500px;
+               }
+          }
 
-    @media (min-width: 1200px) {
-        .carousel-image {
-            height: 600px;
-        }
-    }
+          @media (min-width: 1200px) {
+               .carousel-image {
+                    height: 600px;
+               }
+          }
      </style>
-
-
 </head>
 <body>
      <!-- Navbar -->
-               <?php
-               if (isset($_SESSION['user_id'])) {
-                    require "navbar-log-in.php";
-               } else {
-                    require "navbar.php";
-               }
-               ?>
+     <?php
+     session_start();
+     if (isset($_SESSION['user_id'])) {
+          require "navbar-log-in.php";
+     } else {
+          require "navbar.php";
+     }
+     ?>
      <!-- End Navbar -->
 
      <!-- Carousel -->
-<div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-inner">
-        <div class="carousel-item active">
-            <img src="image/carou1.png" class="d-block w-100 carousel-image" alt="...">
-        </div>
-        <div class="carousel-item">
-            <img src="image/carou3.png" class="d-block w-100 carousel-image" alt="...">
-        </div>
-        <div class="carousel-item">
-            <img src="image/carou2.png" class="d-block w-100 carousel-image" alt="...">
-        </div>
-    </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-    </button>
-</div>
-<!-- End Carousel -->
-
+     <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner">
+               <div class="carousel-item active">
+                    <img src="image/carou1.png" class="d-block w-100 carousel-image" alt="...">
+               </div>
+               <div class="carousel-item">
+                    <img src="image/carou3.png" class="d-block w-100 carousel-image" alt="...">
+               </div>
+               <div class="carousel-item">
+                    <img src="image/carou2.png" class="d-block w-100 carousel-image" alt="...">
+               </div>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+               <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+               <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+               <span class="carousel-control-next-icon" aria-hidden="true"></span>
+               <span class="visually-hidden">Next</span>
+          </button>
+     </div>
+     <!-- End Carousel -->
 
      <!-- Highlight Kategori -->
      <div class="container-fluid mb-4 py-5">
           <div class="container text-center">
                <h3>Kategori Terlaris</h3>
-
                <div class="row mt-5">
                     <div class="col-md-4 mb-3">
                          <div class="highlighted-kategori kategori-terlaris1 d-flex justify-content-center align-items-center">
-                              <h4 class="text-white "><a class="no-decoration" href="produk.php?kategori=Mechanical">Mechanical</a></h4>
-                              
+                              <h4 class="text-white"><a class="no-decoration" href="produk.php?kategori=Mechanical">Mechanical</a></h4>
                          </div>
                     </div>
                     <div class="col-md-4 mb-3">
@@ -130,40 +120,37 @@
      <div class="container-fluid py-5">
           <div class="container text-center">
                <h3>Produk</h3>
-                    <div class="row mt-5">
-                         <?php while ($data = mysqli_fetch_array($queryProduk)){ ?> 
-                         <div class="col-sm-6 col-md-4 mb-3">
-                              <div class="card h-100">
-                                   <div class="image-box">
-                                        <img src="image/<?php echo $data['foto'];  ?>" class="card-img-top" alt="...">
-                                   </div>
-                                        <div class="card-body">
-                                             <h4 class="card-title"><?php echo $data['nama'];  ?></h4>
-                                                  <p class="card-text text-truncate"><?php echo $data['detail'];  ?></p>
-                                                  <p class="card-text text-harga">Rp <?php echo $data['harga'];  ?></p>
-                                                  <a href="produk-detail.php?nama=<?php echo $data['nama']; ?>" class="btn warna1 text-white">Lihat Detail</a>
-                                        </div>
+               <div class="row mt-5">
+                    <?php
+                    require "koneksi.php";
+                    $queryProduk = mysqli_query($con, "SELECT id, nama, harga, foto, detail FROM produk LIMIT 6");
+                    while ($data = mysqli_fetch_array($queryProduk)) { ?>
+                    <div class="col-sm-6 col-md-4 mb-3">
+                         <div class="card h-100">
+                              <div class="image-box">
+                                   <img src="image/<?php echo $data['foto']; ?>" class="card-img-top" alt="...">
+                              </div>
+                              <div class="card-body">
+                                   <h4 class="card-title"><?php echo $data['nama']; ?></h4>
+                                   <p class="card-text text-truncate"><?php echo $data['detail']; ?></p>
+                                   <p class="card-text text-harga">Rp <?php echo $data['harga']; ?></p>
+                                   <a href="produk-detail.php?nama=<?php echo $data['nama']; ?>" class="btn warna1 text-white">Lihat Detail</a>
                               </div>
                          </div>
-                         <?php } ?>     
                     </div>
-               
+                    <?php } ?>
+               </div>
                <!-- See More -->
-                         <a class="btn btn-outline-dark mt-4 p-2" href="produk.php">See More</a>
+               <a class="btn btn-outline-dark mt-4 p-2" href="produk.php">See More</a>
                <!-- End See More -->
-          
           </div>
      </div>
      <!-- End Produk -->
 
-     <!-- Iklan -->
-
-     <!-- End Iklan -->
-
      <!-- Footer -->
-          <?php require "footer.php" ?>
+     <?php require "footer.php" ?>
      <!-- End Footer -->
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>
 </html>
